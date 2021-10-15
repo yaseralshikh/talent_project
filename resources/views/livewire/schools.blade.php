@@ -4,6 +4,12 @@
         <h1 class="h-10 text-lg text-center ">تحديث ارقام جوالات الطلاب الموهوبين</h1>
         <h1 class="text-lg text-center">لضمان استمرارية تقديم الرعاية للطلاب الموهوبين نعمل على تحديث بيانات التواصل</h1>
 
+        <div class="col" style="height: 200px !important;">
+            <livewire:livewire-pie-chart
+                key="{{ $pieChartModel->reactiveKey() }}"
+                :pie-chart-model="$pieChartModel"
+            />
+        </div>
 
         <div class="grid grid-cols-12 gap-4">
             <!-- left column -->

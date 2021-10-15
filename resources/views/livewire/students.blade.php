@@ -33,11 +33,16 @@
                     </span>
                     <input wire:model="search" type="text" wire:model="search" type="text" placeholder="{{ __('site.search') }}" class="block w-full py-2 pl-8 pr-6 text-sm text-gray-700 placeholder-gray-400 bg-white border border-b border-gray-400 rounded-l rounded-r appearance-none sm:rounded-l-none focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
                 </div>
-                {{-- <div class="flex flex-row mt-2 mb-1 mr-3 sm:mb-0">
+                <div class="flex flex-row mt-2 mb-1 mr-3 sm:mb-0">
                     <div class="relative">
-                        {{$students->where('status', true)->count()}} / {{ $students->total() }}
+                        <span class="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900">
+                            <span aria-hidden class="absolute inset-0 bg-green-200 rounded-full opacity-50"></span>
+                            <span class="relative">@lang('site.updated')
+                                {{$activeStud}} / {{ $disActiveStud + $activeStud }}
+                            </span>
+                        </span>
                     </div>
-                </div> --}}
+                </div>
             </div>
 
             @if(count($students) > 0)

@@ -8,7 +8,6 @@ use App\Models\School;
 use Livewire\WithPagination;
 use App\Exports\StudentsExport;
 use Maatwebsite\Excel\Facades\Excel;
-
 class Students extends Component
 {
     use WithPagination;
@@ -115,12 +114,18 @@ class Students extends Component
 
     public function render()
     {
+
+        $activeStud = Student::where('status', true)->count();
+        $disActiveStud = Student::where('status', false)->count();
+
         $schools = School::orderBy('name')->get();
         $students = Student::search($this->search)->Where('status', 'like','%'.$this->changeStatus.'%')->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')->paginate(50);
 
         return view('livewire.students', [
-            'schools' => $schools,
-            'students' => $students
+            'schools'  => $schools,
+            'students' => $students,
+            'activeStud' => $activeStud,
+            'disActiveStud' => $disActiveStud
         ]);
     }
 }

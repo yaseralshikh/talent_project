@@ -6,6 +6,12 @@ use Livewire\Component;
 use App\Models\School;
 use App\Models\Student;
 
+use Asantibanez\LivewireCharts\Models\AreaChartModel;
+use Asantibanez\LivewireCharts\Models\ColumnChartModel;
+use Asantibanez\LivewireCharts\Models\LineChartModel;
+use Asantibanez\LivewireCharts\Models\PieChartModel;
+
+
 class Schools extends Component
 {
     public $school_id = '';
@@ -70,12 +76,22 @@ class Schools extends Component
 
     public function render()
     {
+        $activeStud = Student::where('status', true)->count();
+        $disActiveStud = Student::where('status', false)->count();
+
+        $pieChartModel   =
+            (new PieChartModel())
+                ->setTitle('الطلاب المحدث بياناتهم')
+                ->addSlice('محدث', $activeStud, '#22D430')
+                ->addSlice('غير محدث', $disActiveStud, '#D43322');
+
         $schools = School::orderBy('name')->get();
         $students = Student::where('school_id', $this->school_id)->orderBy('name')->get();
 
         return view('livewire.schools', [
             'schools' => $schools,
-            'students' => $students
+            'students' => $students,
+            'pieChartModel' => $pieChartModel
         ]);
     }
 }
